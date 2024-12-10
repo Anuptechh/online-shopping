@@ -51,33 +51,26 @@ window.onscroll = () =>
     };
 
 
+    
+    const sliderWrapper = document.querySelector(".products-slider .wrapper");
+const boxes = document.querySelectorAll(".products-slider .box");
 
-// Select all images and arrows
-let productImages = document.querySelectorAll('.product-img');
-let prevArrow = document.querySelector('.prev-arrow');
-let nextArrow = document.querySelector('.next-arrow');
-
-// Track the currently displayed image index
-let currentIndex = 0;
-
-// Function to update image visibility
-function updateImageDisplay() {
-    productImages.forEach((img, index) => {
-        img.style.display = index === currentIndex ? 'block' : 'none';
-    });
-}
-
-// Event listener for the "next" arrow
-nextArrow.addEventListener('click', () => {
-    currentIndex = (currentIndex + 1) % productImages.length; // Cycle forward
-    updateImageDisplay();
+// Clone the first few items to make the loop effect
+boxes.forEach((box) => {
+    const clone = box.cloneNode(true);
+    sliderWrapper.appendChild(clone);
 });
 
-// Event listener for the "previous" arrow
-prevArrow.addEventListener('click', () => {
-    currentIndex = (currentIndex - 1 + productImages.length) % productImages.length; // Cycle backward
-    updateImageDisplay();
-});
+// Scroll the slider automatically
+let scrollAmount = 0;
+const boxWidth = boxes[0].offsetWidth + 16; // Box width including the gap
+const scrollInterval = setInterval(() => {
+    scrollAmount += boxWidth;
+    sliderWrapper.style.transform = `translateX(-${scrollAmount}px)`;
 
-// Initialize the display
-updateImageDisplay();
+    if (scrollAmount >= sliderWrapper.scrollWidth / .1) {
+        // Reset to the beginning when the loop completes
+        scrollAmount = 0;
+        sliderWrapper.style.transform = `translateX(0px)`;
+    }
+}, 
