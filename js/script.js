@@ -51,6 +51,10 @@ window.onscroll = () =>
     };
 
 
+
+
+
+
     
     const sliderWrapper = document.querySelector(".products-slider .wrapper");
 const boxes = document.querySelectorAll(".products-slider .box");
@@ -73,4 +77,4 @@ const scrollInterval = setInterval(() => {
         scrollAmount = 0;
         sliderWrapper.style.transform = `translateX(0px)`;
     }
-}, 
+},10000); // Change every 3 seconds
