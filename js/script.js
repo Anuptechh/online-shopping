@@ -77,4 +77,21 @@ const scrollInterval = setInterval(() => {
         scrollAmount = 0;
         sliderWrapper.style.transform = `translateX(0px)`;
     }
-},10000); // Change every 3 seconds
+},1000); // Change every 3 seconds
+
+
+
+function showTab(categoryId) {
+    const categories = document.querySelectorAll('.product-category');
+    const tabs = document.querySelectorAll('.tab-list');
+
+    categories.forEach(category => {
+        category.style.display = 'none';
+    });
+    document.getElementById(categoryId).style.display = 'flex';
+
+    tabs.forEach(tab => {
+        tab.classList.remove('active');
+    });
+    document.querySelector(`[onclick="showTab('${categoryId}')"]`).classList.add('active');
+}
